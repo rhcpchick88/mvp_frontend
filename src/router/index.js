@@ -4,6 +4,7 @@ import cookies from 'vue-cookies'
 
 Vue.use(VueRouter)
 
+
 // Can't show pages other than movie search and view as those are public pages,
 // therefore all other routes require user cookies.
 

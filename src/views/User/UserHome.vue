@@ -9,7 +9,7 @@
 
 <script>
 import cookies from 'vue-cookies'
-import {useUserStore} from '@/stores/user.js'
+import {useUserStore} from '@/store/user.js'
 import {mapState, mapActions} from 'pinia'
 import UserLogout from '@/components/UserLogout.vue'
 

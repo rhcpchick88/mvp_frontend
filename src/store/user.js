@@ -20,8 +20,7 @@ export const useUserStore = defineStore('user', {
             aboutMe, 
             pictureOne, 
             pictureTwo, 
-            pictureThree, 
-            adminStatus, 
+            pictureThree,  
             favoriteMovie, 
             favoriteGenre){
                 axios.request({
@@ -36,7 +35,6 @@ export const useUserStore = defineStore('user', {
                         pictureOne,
                         pictureTwo,
                         pictureThree,
-                        adminStatus,
                         favoriteMovie,
                         favoriteGenre
                     }
@@ -128,6 +126,7 @@ export const useUserStore = defineStore('user', {
                 cookies.get('userToken');
                 console.log(response);
                 this.userInfo = response.data;
+            }).catch((error)=>{
                 this.getUserInfoAlert(error.response);
             })
         },
@@ -139,9 +138,6 @@ export const useUserStore = defineStore('user', {
                 },
                 url:process.env.VUE_APP_API_URL+'user',
                 method:"GET",
-                params:{
-                    userId
-                }
             }).then((response)=>{
                 cookies.get('userToken');
                 console.log(response.data[0]);

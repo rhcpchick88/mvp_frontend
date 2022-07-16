@@ -2,7 +2,7 @@
   <div>
     <v-container>
       <div>
-        <div v-if=userLogin()><ClientLinks/></div>
+        <div v-if=userLogin()><UserLinks/></div>
         <div v-else><PublicLinks/></div>
     </div>
       <router-view/>

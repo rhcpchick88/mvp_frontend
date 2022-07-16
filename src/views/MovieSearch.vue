@@ -9,7 +9,8 @@
 
 <script>
     export default {
-        
+        name : 
+            'MovieSearch'
     }
 </script>
 

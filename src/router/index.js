@@ -25,19 +25,19 @@ const routes = [
   {
     path: '/error',
     name: 'notfound',
-    component: LoginError
+    component: () => import('../views/LoginError.vue')
   },
     // movie search page
   {
     path: '/search',
     name: 'search',
-    component: MovieSearch
+    component: () => import('../views/MovieSearch.vue')
   },
     // movie list page
   {
     path: '/movieview',
     name: 'movies',
-    component: MovieView
+    component: () => import('../views/MovieView.vue')
   },
 
   // GENERAL USER ROUTES
@@ -46,19 +46,20 @@ const routes = [
   {
     path: '/home',
     name: 'home',
-    component: UserHome
+    component: () => import('../views/user/UserHome.vue'),
+    beforeEnter: userAuth
   },
     // user login
   {
     path: '/login',
     name: 'login',
-    component: UserLogin
+    component: () => import('../views/user/UserLogin.vue')
   },
     // user register
   {
     path: '/register',
     name: 'register',
-    component: UserRegister
+    component: () => import('../views/user/UserRegister.vue')
   },
 
   // USER PROFILE ROUTES
@@ -67,13 +68,15 @@ const routes = [
   {
     path: '/profile',
     name: 'profile',
-    component: UserProfile
+    component: () => import('../views/user/profile/UserProfile.vue'),
+    beforeEnter: userAuth
   },
     // profile edit
   {
     path: '/profileedit',
     name: 'profileedit',
-    component: ProfileEdit
+    component: () => import('../views/user/profile/ProfileEdit.vue'),
+    beforeEnter: userAuth
   },
 
   // USER REVIEW ROUTES
@@ -82,19 +85,22 @@ const routes = [
   {
     path: '/postreview',
     name: 'postreview',
-    component: UserReview
+    component: () => import('../views/user/review/ReviewView.vue'),
+    beforeEnter: userAuth
   },
     // review edit
   {
     path: '/reviewedit',
     name: 'reviewedit',
-    component: ReviewEdit
+    component: () => import('../views/user/review/ReviewEdit.vue'),
+    beforeEnter: userAuth
   },
     // review view
   {
     path: '/myreviews',
     name: 'myreviews',
-    component: ReviewView
+    component: () => import('../views/user/review/UserReview.vue'),
+    beforeEnter: userAuth
   },  
 
   // ADMIN ROUTES
@@ -103,25 +109,29 @@ const routes = [
   {
     path: '/movieupload',
     name: 'movieupload',
-    component: MovieUpload
+    component: () => import('../views/user/admin/MovieUpload.vue'),
+    beforeEnter: userAuth
   },
     // movie edit
   {
     path: '/editmovie',
     name: 'editmovie',
-    component: MovieEdit
+    component: () => import('../views/user/admin/MovieEdit.vue'),
+    beforeEnter: userAuth
   },
     // movie view
   {
     path: '/mymovies',
     name: 'mymovies',
-    component: MovieList
+    component: () => import('../views/user/admin/MovieList.vue'),
+    beforeEnter: userAuth
   },
     // review approve
   {
     path: '/reviewapprove',
     name: 'reviewapprove',
-    component: ReviewApprove
+    component: () => import('../views/user/admin/ReviewApprove.vue'),
+    beforeEnter: userAuth
   },  
 ]
 

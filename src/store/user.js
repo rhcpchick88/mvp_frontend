@@ -3,10 +3,10 @@ import { defineStore } from "pinia";
 import cookies from 'vue-cookies';
 import {router} from '@/router'
 
-export const userStore = defineStore('user', {
+export const useUserStore = defineStore('user', {
     state : () => {
         return{
-            userInfo : {}
+            userInfo : {},
             userId:undefined
         }
     },

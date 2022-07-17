@@ -22,7 +22,6 @@ import cookies from 'vue-cookies'
                     }                
                 }).then((response)=>{
                     cookies.remove('userToken', response.data.token)
-                    cookies.remove('userId')
                     console.log(response);
                     this.$router.push('/');
                 }).catch((error)=>{

@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1>Welcome, {{userInfo.firstName}}</h1>
+        <h1>Welcome, {{userInfo[4]}}</h1>
         <footer>
             <UserLogout/>
         </footer>
@@ -19,20 +19,20 @@ import UserLogout from '@/components/UserLogout.vue'
             UserLogout
         },
         computed:{
-            ...mapState(useUserStore,['userInfo', 'userId'])
+            ...mapState(useUserStore,['userInfo'])
         },
         methods:{
-            ...mapActions(useUserStore,['getUserInfo', 'getUserId']),
+            ...mapActions(useUserStore,['getUserInfo']),
             handleError(response){
                 console.log(response);
             }
         },
         beforeMount(){
-            this.getUserId(cookies.get('userToken'))
+            this.getUserInfo(cookies.get('userToken'))
         },
         mounted(){
             useUserStore().$onAction(({name, after})=>{
-                if (name == "getUserIdAlert"){
+                if (name == "getUserInfoAlert"){
                     console.log("handling");
                     after((response)=>{
                         this.handleError(response);

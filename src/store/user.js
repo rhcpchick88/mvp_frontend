@@ -7,10 +7,37 @@ export const useUserStore = defineStore('user', {
     state : () => {
         return{
             userInfo : {},
-            userId:''
+            adminStatus: ''
         }
     },
     actions : {
+
+        // user login
+
+        userLogin(email, password){
+            axios.request({
+                headers:{
+                    "Content-Type" : "application/json"
+                },
+                url:process.env.VUE_APP_API_URL+"user-login",
+                method:"POST",
+                data:{
+                    email,
+                    password
+                }
+            }).then((response)=>{
+                cookies.set('userToken', response.data);
+                console.log(response);
+                router.push('/home')
+            }).catch((error)=>{
+                console.log(error.response.data);
+                this.userLoginAlert(error.response);
+            })
+        },
+        userLoginAlert(error){
+            return(error)
+        },
+
         // register user
 
         submitUser(email, 
@@ -27,6 +54,9 @@ export const useUserStore = defineStore('user', {
                 axios.request({
                     url:process.env.VUE_APP_API_URL+"user",
                     method:"POST",
+                    headers: {
+                        "Content-Type" : "application/json"
+                    },
                     data:{
                         email,
                         username,
@@ -38,14 +68,12 @@ export const useUserStore = defineStore('user', {
                         favoriteGenre,                        
                         pictureOne,
                         pictureTwo,
-                        pictureThree,
-
+                        pictureThree
                     }
                 }).then((response)=>{
-                    cookies.set('userToken', response.data.token);
-                    cookies.set('userId', response.data.token);
+                    cookies.set('userToken', response.data);
                     console.log(cookies.get('userToken'));
-                    router.push('/userprofile');
+                    router.push('/profile');
                 }).catch((error)=>{
                     console.log(error.response.data);
                     this.userRegisterAlert(error.response);
@@ -68,6 +96,7 @@ export const useUserStore = defineStore('user', {
             pictureThree){
                 axios.request({
                     headers:{
+                        "Content-Type" : "application/json",
                         "token":cookies.get('userToken')
                     },
                     url:process.env.VUE_APP_API_URL+"user",
@@ -106,7 +135,6 @@ export const useUserStore = defineStore('user', {
                 method:"DELETE"
             }).then((response)=>{
                 cookies.remove('userToken', response.data.token);
-                cookies.remove('userId', response.data.token);
                 console.log(response);
                 router.push('/');
             }).catch((error)=>{
@@ -128,36 +156,32 @@ export const useUserStore = defineStore('user', {
             }).then((response)=>{
                 cookies.get('userToken');
                 console.log(response);
-                this.userInfo = response.data;
+                this.userInfo = response.data[0];
             }).catch((error)=>{
                 this.getUserInfoAlert(error.response);
             })
         },
         getUserInfoAlert(error){
             return (error)
-        },        
-        //request for user ID
-        getUserId(){
+        },
+        getAdminInfo(){
             axios.request({
                 headers:{
                     "token":cookies.get('userToken')
                 },
                 url:process.env.VUE_APP_API_URL+'user',
-                method:"GET",
+                method:"GET"
             }).then((response)=>{
                 cookies.get('userToken');
-                console.log('userToken');
                 console.log(response.data[0]);
-                this.userId=response.data.userId
-                this.userInfo=response.data[0]
+                this.adminStatus = response.data[0][8];
             }).catch((error)=>{
-                console.log(error.response.data);
-                this.getUserIdAlert(error.response);
+                this.getAdminInfoAlert(error.response);
             })
         },
-        getUserIdAlert(error){
+        getAdminInfoAlert(error){
             return (error)
-        },         
+        }                
     }
 })
 

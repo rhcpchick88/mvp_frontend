@@ -1,5 +1,5 @@
 <template>
-    <div>
+    <div>      
         <v-app id="inspire">
             <h1>Log in here:</h1>
             <v-form>
@@ -57,12 +57,15 @@ export default {
                 v => /(?=.*\d)(?=.*[a-z])(?=.*[A-Z]).{6,}/.test(v) || 'Password must be at least 5 characters and contain at least one lowercase letter, one number, and one uppercase letter',
                 ]
             }
-        },
+        },     
         methods: {
+            userLogin() {
+                return cookies.get('userToken')
+            },           
             login: function(){
                 axios.request({
                     url:process.env.VUE_APP_API_URL+"user-login",
-                    method : "POST",
+                    method:"POST",
                     data:{
                         email : this.email,
                         password : this.password,

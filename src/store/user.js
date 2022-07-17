@@ -7,7 +7,7 @@ export const useUserStore = defineStore('user', {
     state : () => {
         return{
             userInfo : {},
-            userId:undefined
+            userId:''
         }
     },
     actions : {
@@ -15,32 +15,35 @@ export const useUserStore = defineStore('user', {
 
         submitUser(email, 
             username,
+            password,
             firstName, 
             lastName, 
-            aboutMe, 
+            aboutMe,   
+            favoriteMovie, 
+            favoriteGenre,
             pictureOne, 
             pictureTwo, 
-            pictureThree,  
-            favoriteMovie, 
-            favoriteGenre){
+            pictureThree){
                 axios.request({
                     url:process.env.VUE_APP_API_URL+"user",
                     method:"POST",
                     data:{
                         email,
                         username,
+                        password,
                         firstName,
                         lastName,
                         aboutMe,
+                        favoriteMovie,
+                        favoriteGenre,                        
                         pictureOne,
                         pictureTwo,
                         pictureThree,
-                        favoriteMovie,
-                        favoriteGenre
+
                     }
                 }).then((response)=>{
                     cookies.set('userToken', response.data.token);
-                    cookies.set('userId', response.data.clientId);
+                    cookies.set('userId', response.data.token);
                     console.log(cookies.get('userToken'));
                     router.push('/userprofile');
                 }).catch((error)=>{
@@ -54,15 +57,15 @@ export const useUserStore = defineStore('user', {
         // update user
         updateUser(email, 
             username,
+            password,
             firstName, 
             lastName, 
-            aboutMe, 
+            aboutMe,
+            favoriteMovie, 
+            favoriteGenre,             
             pictureOne, 
             pictureTwo, 
-            pictureThree, 
-            adminStatus, 
-            favoriteMovie, 
-            favoriteGenre){
+            pictureThree){
                 axios.request({
                     headers:{
                         "token":cookies.get('userToken')
@@ -72,15 +75,15 @@ export const useUserStore = defineStore('user', {
                     data:{
                         email,
                         username,
+                        password,
                         firstName,
                         lastName,
                         aboutMe,
+                        favoriteMovie,
+                        favoriteGenre,                        
                         pictureOne,
                         pictureTwo,
                         pictureThree,
-                        adminStatus,
-                        favoriteMovie,
-                        favoriteGenre
                     }
                 }).then((response)=>{
                     console.log(response);
@@ -130,6 +133,9 @@ export const useUserStore = defineStore('user', {
                 this.getUserInfoAlert(error.response);
             })
         },
+        getUserInfoAlert(error){
+            return (error)
+        },        
         //request for user ID
         getUserId(){
             axios.request({
@@ -140,6 +146,7 @@ export const useUserStore = defineStore('user', {
                 method:"GET",
             }).then((response)=>{
                 cookies.get('userToken');
+                console.log('userToken');
                 console.log(response.data[0]);
                 this.userId=response.data.userId
                 this.userInfo=response.data[0]
@@ -147,7 +154,10 @@ export const useUserStore = defineStore('user', {
                 console.log(error.response.data);
                 this.getUserIdAlert(error.response);
             })
-        }
+        },
+        getUserIdAlert(error){
+            return (error)
+        },         
     }
 })
 

@@ -133,17 +133,17 @@
             </v-col>                                
 
             </v-row>
-        <v-btn  @click="submitUser(username, 
+        <v-btn  @click="submitUser(email, 
+        username, 
+        password, 
         firstName, 
         lastName, 
-        email, 
-        password, 
         aboutMe,
+        favoriteMovie,
+        favoriteGenre,     
         pictureOne,
         pictureTwo,
-        pictureThree,
-        favoriteMovie,
-        favoriteGenre)"> Register </v-btn>
+        pictureThree)"> Register </v-btn>
         </v-container>
         </v-form>
     </v-app>
@@ -162,7 +162,12 @@ import {mapActions} from 'pinia'
             firstName:'',
             lastName:'',
             password:'',
-            pictureUrl:undefined,
+            aboutMe:'',
+            pictureOne:'',
+            pictureTwo:'',
+            pictureThree:'',
+            favoriteMovie:'',
+            favoriteGenre:'',
             emailRules: [
             v => !!v || 'E-mail is required',
             v => /.+@.+/.test(v) || 'E-mail must be valid',
@@ -185,7 +190,18 @@ import {mapActions} from 'pinia'
         ...mapActions(useUserStore,['submitUser']),
         handleUserRegistration() {
             //Some kind of form validation
-            this.submitForm(this.username, this.firstName, this.lastName, this.email, this.password, this.pictureUrl);
+            this.submitForm(this.email, 
+            this.username, 
+            this.password, 
+            this.firstName, 
+            this.lastName, 
+            this.aboutMe, 
+            this.favoriteMovie,
+            this.favoriteGenre,
+            this.pictureOne, 
+            this.pictureTwo, 
+            this.pictureThree,
+            );
         },
         handleError(response){
             console.log(response);

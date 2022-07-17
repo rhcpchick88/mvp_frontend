@@ -14,16 +14,16 @@
 import cookies from 'vue-cookies'
 
 import PublicLinks from "./components/PublicLinks.vue";
-import UserLinks from "./components/UserLinks.vue";
+import UserLinks from "./components/UserLinks.vue"
 
 
 export default {
-    name: "App",
+    name: 'App',
     data: () => ({
     //
     }),
     components: { 
-      PublicLinks,
+      PublicLinks ,
       UserLinks
       },
         methods: {

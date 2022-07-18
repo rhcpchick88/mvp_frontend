@@ -14,7 +14,7 @@
 import cookies from 'vue-cookies'
 
 import PublicLinks from "./components/PublicLinks.vue";
-import UserLinks from "./components/UserLinks.vue"
+import UserLinks from "./components/UserLinks.vue";
 
 
 export default {
@@ -24,7 +24,7 @@ export default {
     }),
     components: { 
       PublicLinks ,
-      UserLinks
+      UserLinks,
       },
         methods: {
             userLogin() {

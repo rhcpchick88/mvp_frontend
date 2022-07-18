@@ -1,9 +1,6 @@
 <template>
     <div>
         <v-btn @click="logout">Log out</v-btn>
-        <div v-if="error"> 
-            <p> Unable to Log out </p>
-        </div>
     </div>
 </template>
 

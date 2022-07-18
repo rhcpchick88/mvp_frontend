@@ -1,6 +1,8 @@
 <template>
     <div>
-        <h1>Welcome, {{userInfo[4]}}</h1>
+        <h1>
+            Welcome, {{userInfo[4]}}
+        </h1>
         <footer>
             <UserLogout/>
         </footer>

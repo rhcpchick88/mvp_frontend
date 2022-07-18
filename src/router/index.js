@@ -18,6 +18,7 @@ function userAuth (to, from, next) {
   }
 }
 
+
 const routes = [
 
   // PUBLIC ROUTES

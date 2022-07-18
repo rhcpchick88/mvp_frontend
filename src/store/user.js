@@ -173,7 +173,6 @@ export const useUserStore = defineStore('user', {
                 method:"GET"
             }).then((response)=>{
                 cookies.get('userToken');
-                console.log(response.data[0]);
                 this.adminStatus = response.data[0][8];
             }).catch((error)=>{
                 this.getAdminInfoAlert(error.response);

@@ -101,7 +101,7 @@ const routes = [
   {
     path: '/myreviews',
     name: 'myreviews',
-    component: () => import('../views/user/review/UserReview.vue'),
+    component: () => import('../views/user/review/ReviewView.vue'),
     beforeEnter: userAuth
   },  
 

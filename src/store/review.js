@@ -78,7 +78,7 @@ export const useReviewStore = defineStore('review', {
             }).then((response)=>{
                 cookies.get('userToken');
                 console.log(response);
-                this.reviewInfo = response.data;
+                this.reviewInfo = response.data[0];
             }).catch((error)=>{
                 this.getReviewInfoAlert(error.response);
             })

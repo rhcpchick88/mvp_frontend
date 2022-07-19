@@ -15,8 +15,7 @@
                 show-arrows>
                     <v-tab  to="/">Home</v-tab> 
                     <v-tab to="/search">Search for movies</v-tab> 
-                    <v-tab to="/login">User Login/Register</v-tab>
-                    <v-tab to="/reviews">View Reviews</v-tab>                        
+                    <v-tab to="/login">User Login/Register</v-tab>                  
                 </v-tabs>
         </template>
         </v-app-bar>

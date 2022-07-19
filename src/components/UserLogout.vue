@@ -1,6 +1,6 @@
 <template>
     <div>
-        <v-btn @click="logout">Log out</v-btn>
+        <v-btn @click="logout" dark>Log out</v-btn>
     </div>
 </template>
 
@@ -30,4 +30,10 @@ import cookies from 'vue-cookies'
 </script>
 
 <style lang="scss" scoped>
+div{
+    position:sticky;
+    left:38vw;
+    width:100%;
+    height:60px;
+}
 </style>

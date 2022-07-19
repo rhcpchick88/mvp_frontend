@@ -33,3 +33,8 @@ export default {
         },    
 };
 </script>
+<style>
+.v-application--wrap {
+  min-height: unset;
+}
+</style>

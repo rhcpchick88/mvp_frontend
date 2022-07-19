@@ -87,7 +87,7 @@ const routes = [
   {
     path: '/postreview',
     name: 'postreview',
-    component: () => import('../views/user/review/ReviewView.vue'),
+    component: () => import('../views/user/review/UserReview.vue'),
     beforeEnter: userAuth
   },
     // review edit

@@ -35,10 +35,11 @@
                 </v-container>
             </v-card>
             <v-spacer/>
+
             <v-card 
             class="mxy-16"
             height="50vh"
-            width="1000"
+            max-width="2000"
             outlined
             elevation="2"
             img="https://motionarray.imgix.net/preview-79920-w7DoVIIPVS-high_0005.jpg?w=660&q=60&fit=max&auto=format"

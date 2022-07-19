@@ -1,13 +1,28 @@
 // Links on public view 
 <template>
-    <div>
-        <nav
-        width="100vw">
-            <v-btn to="/">Home</v-btn> |
-            <v-btn to="/search">Search for movies</v-btn> |
-            <v-btn to="/login">User Login/Register</v-btn>
-        </nav>
-    </div>
+<div>
+    <v-app height="100">
+    <v-card>
+        <v-app-bar
+        dark
+        prominent
+        src="https://allthatsinteresting.com/wordpress/wp-content/uploads/2013/05/cinemagraph-gifs-aliens-computer-room.gif"
+        >
+        <v-app-bar-title center>Movies At Home</v-app-bar-title>
+        <template v-slot:extension>
+                <v-tabs
+                align-with-title
+                show-arrows>
+                    <v-tab  to="/">Home</v-tab> 
+                    <v-tab to="/search">Search for movies</v-tab> 
+                    <v-tab to="/login">User Login/Register</v-tab>
+                    <v-tab to="/reviews">View Reviews</v-tab>                        
+                </v-tabs>
+        </template>
+        </v-app-bar>
+    </v-card>
+    </v-app>
+</div>
 </template>
 
 <script>

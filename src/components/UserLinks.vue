@@ -1,28 +1,31 @@
 <template>
-    <div>
-    <div>
+<div>
+    <v-app height="100">
+    <v-card>
         <v-app-bar
         dark
-        absolute
         prominent
-        src="https://image1.masterfile.com/getImage/NjU5LTA2MTg2MDg2ZW4uMDAwMDAwMDA=AC72EV/659-06186086en_Masterfile.jpg">
-        <template v-slot:img="{ props }">
-            <v-img
-            v-bind="props"
-            gradient="to top right, rgba(255,192,0,0.742734593837535), rgba(25,32,72,.7)"
-            ></v-img>
-        </template>
-                <v-tabs>
+        height="300"
+        src="https://allthatsinteresting.com/wordpress/wp-content/uploads/2013/05/cinemagraph-gifs-aliens-computer-room.gif"
+        >
+        <v-app-bar-title center>Movies At Home</v-app-bar-title>
+        <template v-slot:extension>
+                <v-tabs
+                align-with-title
+                show-arrows>
                     <v-tab  to="/home">Home</v-tab> 
                     <v-tab to="/search">Search for movies</v-tab> 
                     <v-tab to="/profile">View Profile</v-tab> 
                     <v-tab to="/postreview">Post Reviews</v-tab> 
+                    <v-tab to="/reviews">View Reviews</v-tab>                     
                     <v-tab v-if="adminStatus" to="/movieupload">New movie entry</v-tab> 
                     <v-tab v-if="adminStatus" to="/reviewapprove">Review Approval</v-tab>                        
                 </v-tabs>
+        </template>
         </v-app-bar>
-    </div>
-    </div>
+    </v-card>
+    </v-app>
+</div>
 </template>
 
 <script>

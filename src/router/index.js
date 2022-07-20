@@ -80,6 +80,7 @@ const routes = [
     component: () => import('../views/user/profile/ProfileEdit.vue'),
     beforeEnter: userAuth
   },
+  
 
   // USER REVIEW ROUTES
 
@@ -97,13 +98,11 @@ const routes = [
     component: () => import('../views/user/review/ReviewEdit.vue'),
     beforeEnter: userAuth
   },
-    // review view
   {
-    path: '/myreviews',
+    path:'/myreviews',
     name: 'myreviews',
-    component: () => import('../views/user/review/ReviewView.vue'),
-    beforeEnter: userAuth
-  },  
+    component: () => import('../views/user/review/MyReview.vue')
+  },
 
   // ADMIN ROUTES
 

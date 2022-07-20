@@ -71,13 +71,27 @@
                                 <v-btn
                                 class="justify-center"
                                 outlined
-                                rounded
-                                text><h2>Click to load reviews</h2></v-btn>
+                                text
+                                dark><v-btn @click="movieReviewSearch(movie[1][0])">Click to load reviews</v-btn></v-btn>
                             </v-card-actions>
                         </v-col>
                     </v-row>
                 </v-container>
             </v-card>
+            <v-container v-if=reviewResult>
+                <v-card 
+                class="mxy-16"
+                height="50vh"
+                max-width="2000"
+                outlined
+                elevation="2"
+                img="https://motionarray.imgix.net/preview-79920-w7DoVIIPVS-high_0005.jpg?w=660&q=60&fit=max&auto=format"
+                v-for="review in reviewResult" 
+                :key="review.id">
+                    <h1>Review:{{review.review}}</h1>
+                    <h2>Rating:{{review.rating}}</h2>
+                </v-card>   
+            </v-container>         
         </v-container>
     </v-app>
 </div>
@@ -90,19 +104,23 @@ import {mapState, mapActions} from 'pinia'
     export default {
         name: 'MovieSearch',
         data:() => ({
-            search:''
+            search:'',
+            movieId:'',
         }),
         computed:{
-            ...mapState(useMovieStore,['movieResult'])
+            ...mapState(useMovieStore,['movieResult','reviewResult'])
         },
         methods:{
-            ...mapActions(useMovieStore,['movieSearch']),
+            ...mapActions(useMovieStore,['movieSearch','movieReviewSearch']),
             handleSearch(){
                 this.movieSearch(this.search);
             },
+            handleReviewSearch(){
+                this.movieReviewSearch(this.movieId);
+            },
             handleError(response){
                 console.log(response);
-            }
+            },
         },
         mounted(){
             useMovieStore().$onAction(({name, after})=>{

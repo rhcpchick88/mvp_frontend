@@ -16,8 +16,8 @@
                     <v-tab  to="/home">Home</v-tab> 
                     <v-tab to="/search">Search for movies</v-tab> 
                     <v-tab to="/profile">View Profile</v-tab> 
-                    <v-tab to="/postreview">Post Reviews</v-tab> 
-                    <v-tab to="/myreviews">View Reviews</v-tab>                     
+                    <v-tab to="/postreview">Post Reviews</v-tab>   
+                    <!-- <v-tab to="/myreviews">View My Reviews</v-tab>               -->
                     <v-tab v-if="adminStatus" to="/movieupload">New movie entry</v-tab> 
                     <v-tab v-if="adminStatus" to="/reviewapprove">Review Approval</v-tab>                        
                 </v-tabs>

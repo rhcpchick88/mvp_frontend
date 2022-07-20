@@ -1,8 +1,9 @@
 <template>
-    <div>
+<div>
     <div id="app">
     <v-app id="inspire">
         <v-form>
+            <v-card height="70"><h1 class="review">Post review</h1></v-card>
             <v-card>
                 <h1>Movie Title</h1>
                 <v-text-field
@@ -32,55 +33,119 @@
                 large
                 ></v-rating>
                 <v-btn  @click="submitReview(
-                    title,
+                    movie,
                     review,
                     rating,
-                )"> Submit Review </v-btn>
+                )" dark> Submit Review </v-btn>
             </v-card>
+        <v-card height="70" >
+            <h1 class="mine">My reviews</h1>
+        </v-card>            
+        <v-card
+        width="100vw"
+        class="mx-auto"
+        v-for="review in reviewInfo"
+        :key="review[0]"
+        >
+            <v-list two-line>
+                <!-- <v-list-item>
+                    <v-list-item-content>
+                        <v-list-item-title class="title1">{{title}}</v-list-item-title>
+                        <v-list-item-subtitle class="subtitle">Movie Title</v-list-item-subtitle>
+                    </v-list-item-content>
+                </v-list-item> -->
+                <v-divider inset></v-divider>
+                <v-list-item>
+                    <v-list-item-content>
+                        <h1>Review:</h1>
+                        <h2>{{review[1]}}</h2>
+                    </v-list-item-content>
+                </v-list-item>
+                <v-divider inset></v-divider>
+                <v-list-item>
+                    <v-list-item-content>
+                        <h1>Rating:</h1>
+                        <h2>{{review[3]}}</h2>
+                    </v-list-item-content>
+                </v-list-item>               
+            </v-list>
+        </v-card>            
         </v-form>
     </v-app>
-</div>
     </div>
+    <div>
+        <UserLogout/>
+    </div>
+</div>    
 </template>
 
 <script>
-import {useReviewStore} from '@/store/review.js'
-import {mapActions} from 'pinia'
+import UserLogout from '@/components/UserLogout.vue'
+import { useReviewStore } from '@/store/review.js'
+import {mapActions, mapState} from 'pinia'
     export default {
         name: 'UserReview',
+        components:{
+            UserLogout
+        },
         data: () => ({
             movie:'',
             review:'',
             rating:''       
         }),
-    methods: {
-        ...mapActions(useReviewStore,['submitReview']),
-        handleReview() {
-            //Some kind of form validation
-            this.submitForm(this.movie,
-            this.review,
-            this.rating
-            );
+        computed:{
+            ...mapState(useReviewStore,['reviewInfo']),
+            
         },
-        handleError(response){
-            console.log(response);
-        }
-    },
-    mounted () {
-        useReviewStore().$onAction(({name, after})=>{
-            if (name == "reviewPostAlert"){
-                console.log("handling");
-                after((response)=>{
-                    this.handleError(response);
-                })
+        methods: {
+            ...mapActions(useReviewStore,['submitReview','getReview']),
+            handleReview() {
+                //Some kind of form validation
+                this.submitForm(this.movie,
+                this.review,
+                this.rating
+                );
+            },
+            handleError(response){
+                console.log(response);
             }
-        });
-    },
+        },
+        beforeMount(){
+            this.getReview()
+        },
+        mounted () {
+            useReviewStore().$onAction(({name, after})=>{
+                if (name == "reviewPostAlert"){
+                    console.log("handling");
+                    after((response)=>{
+                        this.handleError(response);
+                    })
+                }
+                if (name == "getReviewInfoAlert"){
+                    console.log("handling");
+                    after ((response)=>{
+                        this.handleError(response)
+                    })
+                }
+            });
+        },
     }
 
     
 </script>
 
 <style lang="scss" scoped>
+h1{
+    text-align:center;
 
+}
+h2 {
+    font-weight:400;
+    text-align:center;
+}
+.review, .mine {
+    background-color:rgba(171, 117, 16, 0.743);
+    font-size:50px;
+    text-align:center
+}
 </style>

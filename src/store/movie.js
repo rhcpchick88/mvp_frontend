@@ -6,7 +6,8 @@ export const useMovieStore = defineStore('movie', {
     state : () => {
         return {
             movieInfo : {},
-            movieResult: {}
+            movieResult: {},
+            reviewResult: {}
         }
     },
     actions : {
@@ -24,6 +25,25 @@ export const useMovieStore = defineStore('movie', {
         },
         getMovieInfoAlert(error){
             return (error)
+        },
+        movieReviewSearch(movieId){
+            axios.request({
+                url:process.env.VUE_APP_API_URL+'movie-list',
+                method:"POST",
+                headers:{"Content-Type":"application/json",
+                },
+                data:{
+                    movieId
+                }
+            }).then((response)=>{
+                this.reviewResult = response.data;
+                console.log(response);
+            }).catch((error)=>{
+                console.log(error);           
+            })
+        },
+        getReviewInfoAlert(error){
+            return(error)
         },
         movieSearch(search){
             axios.request({               
@@ -44,7 +64,7 @@ export const useMovieStore = defineStore('movie', {
         },
         getMovieResultAlert(error){
             return (error)
-        }        
+        },    
     }
 })
 

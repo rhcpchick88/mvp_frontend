@@ -74,11 +74,11 @@ export const useReviewStore = defineStore('review', {
                     "token":cookies.get('userToken')
                 },
                 url:process.env.VUE_APP_API_URL+'reviews',
-                method:"GET"
+                method:"GET",
             }).then((response)=>{
                 cookies.get('userToken');
                 console.log(response);
-                this.reviewInfo = response.data[0];
+                this.reviewInfo = response.data;
             }).catch((error)=>{
                 this.getReviewInfoAlert(error.response);
             })

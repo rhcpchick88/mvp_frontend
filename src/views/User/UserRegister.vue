@@ -1,3 +1,9 @@
+<!-- simple user registration page. As of now, 
+users can enter pictures into the DB but it won't show on 
+user profiles. I also need to add that it needs to 
+be a URL, as well as some database rules and more
+basic form entry rules.-->
+
 <template>
     <div>
     <div id="app">

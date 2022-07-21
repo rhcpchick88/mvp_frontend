@@ -1,5 +1,11 @@
-// show user links if user is logged in, otherwise show public links.
-// shows search function instead of listed movies.
+<!-- Anyone can use this page
+it needs some reformatting, but it now shows
+movies as well as reviews, I would like to add
+dynamic routing to this so I can show each movie
+on their own page. For now the reviews
+just pop up using a v-dialog.. my v-cards are 
+not formatted the best and that will be something
+I am fixing in the future as well.-->
 
 <template>
 <div id="app">
@@ -68,30 +74,37 @@
                         class=" d-flex flex-column justify-center align-center">                                        
                             <v-card-actions
                             class="justify-center">
-                                <v-btn
-                                class="justify-center"
-                                outlined
-                                text
-                                dark><v-btn @click="movieReviewSearch(movie[1][0])">Click to load reviews</v-btn></v-btn>
+                            <v-text-field 
+                            v-model="reviewSearch"
+                            hidden>{{movie[0][0]}}
+                            </v-text-field>
+                            <v-btn 
+                                @click="reviewList(movie[0][0])"
+                                @click.stop="dialog=true">Click to load reviews
+                            </v-btn>
                             </v-card-actions>
+                            <v-dialog
+                            v-model="dialog"
+                            width="500">
+                                <v-card
+                                v-for="review in reviewInfo" 
+                                :key="review.id"
+                                >
+                                    <v-card-title>Review:{{review.review}}</v-card-title>
+                                    <v-card-text>Rating:{{review.rating}}</v-card-text>
+                                </v-card>
+                                <v-card-actions
+                                class="justify-end">
+                                    <v-btn
+                                    @click="dialog=false">
+                                        Exit
+                                    </v-btn>
+                                </v-card-actions>                            
+                            </v-dialog>                            
                         </v-col>
                     </v-row>
                 </v-container>
             </v-card>
-            <v-container v-if=reviewResult>
-                <v-card 
-                class="mxy-16"
-                height="50vh"
-                max-width="2000"
-                outlined
-                elevation="2"
-                img="https://motionarray.imgix.net/preview-79920-w7DoVIIPVS-high_0005.jpg?w=660&q=60&fit=max&auto=format"
-                v-for="review in reviewResult" 
-                :key="review.id">
-                    <h1>Review:{{review.review}}</h1>
-                    <h2>Rating:{{review.rating}}</h2>
-                </v-card>   
-            </v-container>         
         </v-container>
     </v-app>
 </div>
@@ -105,28 +118,35 @@ import {mapState, mapActions} from 'pinia'
         name: 'MovieSearch',
         data:() => ({
             search:'',
-            movieId:'',
+            reviewSearch:'',
+            dialog:false
         }),
         computed:{
-            ...mapState(useMovieStore,['movieResult','reviewResult'])
+            ...mapState(useMovieStore,['movieResult','reviewInfo'])
         },
         methods:{
-            ...mapActions(useMovieStore,['movieSearch','movieReviewSearch']),
+            ...mapActions(useMovieStore,['movieSearch','reviewList']),
             handleSearch(){
                 this.movieSearch(this.search);
             },
             handleReviewSearch(){
-                this.movieReviewSearch(this.movieId);
+                this.reviewList(this.reviewSearch);
+            }
             },
             handleError(response){
                 console.log(response);
             },
-        },
         mounted(){
             useMovieStore().$onAction(({name, after})=>{
                 if (name == "getMovieResultAlert"){
                     console.log("handling");
                     after((response)=>{
+                        this.handleError(response);
+                    })
+                }
+                if (name == "getReviewAlert"){
+                    console.log("handling");
+                    after ((response)=>{
                         this.handleError(response);
                     })
                 }

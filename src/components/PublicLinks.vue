@@ -1,4 +1,15 @@
-// Links on public view 
+// Links for the public - not logged in
+</template>
+
+<script>
+export default {
+
+}
+</script>
+
+<style>
+
+</style>
 <template>
 <div>
     <v-app height="100">

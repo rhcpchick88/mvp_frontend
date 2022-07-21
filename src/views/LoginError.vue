@@ -1,4 +1,5 @@
-// login error page - not authorized
+<!-- shows if the user tries to access
+a page if they aren't logged in. -->
 
 <template>
     <div>

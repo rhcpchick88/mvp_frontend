@@ -5,46 +5,12 @@ import { defineStore } from "pinia";
 export const useMovieStore = defineStore('movie', {
     state : () => {
         return {
-            movieInfo : {},
             movieResult: {},
-            reviewResult: {}
+            reviewInfo: {}
         }
     },
     actions : {
-        // public movie list
-        movieList(){
-            axios.request({               
-                url:process.env.VUE_APP_API_URL+'movie-list',
-                method:"GET"
-            }).then((response)=>{
-                this.movieInfo = response.data;
-                console.log(response);                
-            }).catch((error)=>{
-                this.getMovieInfoAlert(error.response);
-            })
-        },
-        getMovieInfoAlert(error){
-            return (error)
-        },
-        movieReviewSearch(movieId){
-            axios.request({
-                url:process.env.VUE_APP_API_URL+'movie-list',
-                method:"POST",
-                headers:{"Content-Type":"application/json",
-                },
-                data:{
-                    movieId
-                }
-            }).then((response)=>{
-                this.reviewResult = response.data;
-                console.log(response);
-            }).catch((error)=>{
-                console.log(error);           
-            })
-        },
-        getReviewInfoAlert(error){
-            return(error)
-        },
+        // fuzzy search for specific movie.
         movieSearch(search){
             axios.request({               
                 url:process.env.VUE_APP_API_URL+'movie-search',
@@ -54,6 +20,7 @@ export const useMovieStore = defineStore('movie', {
                 },
                 data:{
                     search
+                    //takes in search params from the movie search page.
                 }
             }).then((response)=>{
                 this.movieResult = response.data;
@@ -65,6 +32,34 @@ export const useMovieStore = defineStore('movie', {
         getMovieResultAlert(error){
             return (error)
         },    
+        // return reviews for the movie
+        reviewList(reviewSearch){
+            axios.request({
+                headers:{
+                    "Content-Type" : "application/json"
+                },
+                url:process.env.VUE_APP_API_URL+'movie-list',
+                method:"POST",
+                //I made this method a post for now, until I can figure
+                // out a better system. I used the return data from the 
+                // GET request for movie search, to POST and search
+                // for a relevant review.
+                // as of now, I am not sure if it works for movies with
+                // multiple names but I will be correcting that in the 
+                // future. For now, I can show some reviews, yay.
+                data:{
+                    reviewSearch
+                }
+            }).then((response)=>{
+                this.reviewInfo = response.data;
+                console.log(response);                
+            }).catch((error)=>{
+                this.getReviewAlert(error.response);
+            })
+        },
+        getReviewAlert(error){
+            return (error)
+        },        
     }
 })
 

@@ -18,7 +18,11 @@
                     <v-tab to="/profile">View Profile</v-tab> 
                     <v-tab to="/postreview">Post Reviews</v-tab>   
                     <!-- <v-tab to="/myreviews">View My Reviews</v-tab>               -->
+                    <!-- will add this later. for now I load the reviews
+                    on the  post review table. -->
                     <v-tab v-if="adminStatus" to="/movieupload">New movie entry</v-tab> 
+                    <!-- admin status = 0 or 1 in my code, to display these tabs 
+                    and other various website navigation purposes. -->
                     <v-tab v-if="adminStatus" to="/reviewapprove">Review Approval</v-tab>                        
                 </v-tabs>
         </template>

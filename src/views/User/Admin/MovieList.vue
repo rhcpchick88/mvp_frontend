@@ -1,3 +1,6 @@
+<!-- THIS IS TO SHOW movies personally uploaded
+by the user who is logged in.-->
+
 <template>
     <div>
 

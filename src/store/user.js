@@ -82,70 +82,79 @@ export const useUserStore = defineStore('user', {
             userRegisterAlert(error){
                 return(error)
             },
-        // update user
-        updateUser(email, 
-            username,
-            password,
-            firstName, 
-            lastName, 
-            aboutMe,
-            favoriteMovie, 
-            favoriteGenre,             
-            pictureOne, 
-            pictureTwo, 
-            pictureThree){
-                axios.request({
-                    headers:{
-                        "Content-Type" : "application/json",
-                        "token":cookies.get('userToken')
-                    },
-                    url:process.env.VUE_APP_API_URL+"user",
-                    method:"PATCH",
-                    data:{
-                        email,
-                        username,
-                        password,
-                        firstName,
-                        lastName,
-                        aboutMe,
-                        favoriteMovie,
-                        favoriteGenre,                        
-                        pictureOne,
-                        pictureTwo,
-                        pictureThree,
-                    }
-                }).then((response)=>{
-                    console.log(response);
-                    router.push('/profile');
-                }).catch((error)=>{
-                    console.log(error.response.data);
-                    this.userUpdateAlert(error.response);
-                })
-            },
-            userUpdateAlert(error){
-                return(error)
-            },
-        // delete user profile
-        deleteUser(){
-            axios.request({
-                headers: {
-                    "token":cookies.get('userToken'),
-                },
-                url:process.env.VUE_APP_API_URL+'user',
-                method:"DELETE"
-            }).then((response)=>{
-                cookies.remove('userToken', response.data.token);
-                console.log(response);
-                router.push('/');
-            }).catch((error)=>{
-                console.log(error.response.data);
-                this.userDeleteAlert(error.response);
-            })
-        },
-        userDeleteAlert(error){
-            return (error)
-        },
+        // update user I DID NOT GET AROUND TO THIS AS 
+        // REVIEWS WERE MY PRIORITY. WILL ADD AT A LATER
+        // DATE
+
+        // updateUser(email, 
+        //     username,
+        //     password,
+        //     firstName, 
+        //     lastName, 
+        //     aboutMe,
+        //     favoriteMovie, 
+        //     favoriteGenre,             
+        //     pictureOne, 
+        //     pictureTwo, 
+        //     pictureThree){
+        //         axios.request({
+        //             headers:{
+        //                 "Content-Type" : "application/json",
+        //                 "token":cookies.get('userToken')
+        //             },
+        //             url:process.env.VUE_APP_API_URL+"user",
+        //             method:"PATCH",
+        //             data:{
+        //                 email,
+        //                 username,
+        //                 password,
+        //                 firstName,
+        //                 lastName,
+        //                 aboutMe,
+        //                 favoriteMovie,
+        //                 favoriteGenre,                        
+        //                 pictureOne,
+        //                 pictureTwo,
+        //                 pictureThree,
+        //             }
+        //         }).then((response)=>{
+        //             console.log(response);
+        //             router.push('/profile');
+        //         }).catch((error)=>{
+        //             console.log(error.response.data);
+        //             this.userUpdateAlert(error.response);
+        //         })
+        //     },
+        //     userUpdateAlert(error){
+        //         return(error)
+        //     },
+
+        // DELETE user I DID NOT GET AROUND TO THIS AS 
+        // REVIEWS WERE MY PRIORITY. WILL ADD AT A LATER
+        // DATE
+
+        // deleteUser(){
+        //     axios.request({
+        //         headers: {
+        //             "token":cookies.get('userToken'),
+        //         },
+        //         url:process.env.VUE_APP_API_URL+'user',
+        //         method:"DELETE"
+        //     }).then((response)=>{
+        //         cookies.remove('userToken', response.data.token);
+        //         console.log(response);
+        //         router.push('/');
+        //     }).catch((error)=>{
+        //         console.log(error.response.data);
+        //         this.userDeleteAlert(error.response);
+        //     })
+        // },
+        // userDeleteAlert(error){
+        //     return (error)
+        // },
+
         //request user info
+
         getUserInfo(){
             axios.request({
                 headers:{
@@ -164,6 +173,10 @@ export const useUserStore = defineStore('user', {
         getUserInfoAlert(error){
             return (error)
         },
+
+        // to get admin status for viewing of various 
+        // routes, as well as v-tabs.
+
         getAdminInfo(){
             axios.request({
                 headers:{

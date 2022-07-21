@@ -1,3 +1,7 @@
+<!-- I will format this in the future, I want this to 
+show users personal reviews on a separate page from the 
+review upload page. -->
+
 <template>
     <div>
         <v-app>

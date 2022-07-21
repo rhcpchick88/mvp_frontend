@@ -1,3 +1,6 @@
+<!-- I don't really have much for this page yet, will
+add more in the future. Just displays the name and admin status. -->
+
 <template>
     <div>
         <v-card>

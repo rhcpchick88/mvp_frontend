@@ -1,3 +1,6 @@
+<!-- this page is temporarily displaying the users
+personal reviews until I update the website. -->
+
 <template>
 <div>
     <div id="app">

@@ -1,3 +1,5 @@
+<!-- simple edit review page, will add in future. -->
+
 <template>
     <div>
 

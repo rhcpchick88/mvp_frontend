@@ -1,3 +1,5 @@
+<!-- simple log in page. -->
+
 <template>
     <div>      
         <v-app id="inspire">
